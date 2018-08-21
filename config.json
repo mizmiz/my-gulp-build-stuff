@@ -1,0 +1,58 @@
+{
+    "format": {
+        "date": "dd.mm.yyyy",
+        "time": "HH:MM:ss"
+    },
+
+    "scss": {
+        "src": {
+            "dir": "resources/assets/sass",
+            "file": "resources/assets/sass/main.scss"
+        }
+    },
+
+    "img": {
+        "src": {
+            "dir": "resources/assets/images"
+        },
+        "dest": {
+            "dir": "images"
+        }
+    },
+
+    "css": {
+        "dest": {
+            "dir": "css",
+            "file": "main.min.css"
+        }
+    },
+
+    "js": {
+        "src": {
+            "vendor": [
+            ],
+            "files": [
+                "resources/assets/js/main.js"
+            ]
+        },
+        "dest": {
+            "dir": "js",
+            "file": "main.min.js"
+        }
+    },
+
+    "browserSync": {
+        "proxy": "http://test.local/",
+        "port": 3000,
+        "open": false,
+        "reloadOnRestart": true,
+        "notify": false,
+        "reloadDelay": 0,
+        "ghostMode": false,
+        "ui": false,
+        "open": "local",
+        "browser": ["google chrome"]
+    },
+
+    "sound": false
+}
