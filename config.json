@@ -6,23 +6,23 @@
 
     "scss": {
         "src": {
-            "dir": "resources/assets/sass",
-            "file": "resources/assets/sass/main.scss"
+            "dir": "src/sass",
+            "file": "src/sass/test.scss"
         }
     },
 
     "img": {
         "src": {
-            "dir": "resources/assets/images"
+            "dir": "src/assets/images"
         },
         "dest": {
-            "dir": "images"
+            "dir": "dest/images"
         }
     },
 
     "css": {
         "dest": {
-            "dir": "css",
+            "dir": "dest",
             "file": "main.min.css"
         }
     },
@@ -32,11 +32,11 @@
             "vendor": [
             ],
             "files": [
-                "resources/assets/js/main.js"
+                "src/js/test.js"
             ]
         },
         "dest": {
-            "dir": "js",
+            "dir": "dest",
             "file": "main.min.js"
         }
     },
