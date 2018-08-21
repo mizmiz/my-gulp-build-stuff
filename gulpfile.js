@@ -26,7 +26,7 @@ const log = require('fancy-log');
 const browserSync = require('browser-sync');
 const bump = require('gulp-bump');
 const conventionalChangelog = require('conventional-changelog');
-const fs = require('fs');
+const fileSystem = require('fs');
 const git = require('gulp-git');
 
 const banner = `
@@ -420,9 +420,9 @@ gulp.task('bump', () => {
  */
 gulp.task('changelog', () => {
     return conventionalChangelog({
-            releaseCount: 0
-        })
-        .pipe(fs.createWriteStream('CHANGELOG.md'));
+        releaseCount: 0,
+    })
+        .pipe(fileSystem.createWriteStream('CHANGELOG.md'));
 });
 
 /**
@@ -430,7 +430,7 @@ gulp.task('changelog', () => {
  */
 gulp.task('git:commit', () => {
     return gulp.src('./')
-        .pipe(git.commit(`Bump Version`))
+        .pipe(git.commit('Bump Version'))
         // Done
         .on('end', () => {
             // Console message

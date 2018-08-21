@@ -32,6 +32,7 @@
             "vendor": [
             ],
             "files": [
+                "./gulpfile.js",
                 "src/js/test.js"
             ]
         },
