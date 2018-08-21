@@ -20,7 +20,6 @@ const babel = require('gulp-babel');
 const imagemin = require('gulp-imagemin');
 const del = require('del');
 const prettyBytes = require('pretty-bytes');
-const gulpSequence = require('gulp-sequence');
 const notifier = require('node-notifier');
 const chalk = require('chalk');
 const log = require('fancy-log');
