@@ -28,6 +28,7 @@ const browserSync = require('browser-sync');
 const bump = require('gulp-bump');
 const conventionalChangelog = require('conventional-changelog');
 const fs = require('fs');
+const git = require('gulp-git');
 
 const banner = `
 /**
@@ -85,6 +86,7 @@ gulp.task('sass:min:concat', () => {
     }
 
     // Reload package info
+    delete require.cache[require.resolve('./package.json')];
     pkg = require('./package.json');
 
     return gulp.src(config.scss.src.file)
@@ -168,6 +170,7 @@ gulp.task('concat:js:min', () => {
     }
 
     // Reload package info
+    delete require.cache[require.resolve('./package.json')];
     pkg = require('./package.json');
 
     return gulp.src(files)
@@ -424,28 +427,52 @@ gulp.task('changelog', () => {
 });
 
 /**
+ * Create Git commit
+ */
+gulp.task('git:commit', () => {
+    return gulp.src('./')
+        .pipe(git.commit(`Bump Version`))
+        // Done
+        .on('end', () => {
+            // Console message
+            log(chalk.green('Version bumped'));
+        })
+        // Error
+        .on('error', () => {
+            // Console message
+            log(chalk.red('git:commit FAILED'));
+        });
+});
+
+/**
+ * Create Git tag
+ */
+gulp.task('git:tag', (done) => {
+    // Reload package info
+    delete require.cache[require.resolve('./package.json')];
+    pkg = require('./package.json');
+
+    git.tag(`v${pkg.version}`, '', (err) => {
+        if (err) {
+            // Console message
+            log(chalk.red('git:tag FAILED'));
+        }
+        // Console message
+        log(chalk.green(`Tag git with: ${pkg.version}`));
+        done();
+    });
+});
+
+/**
  * Alias
  */
 gulp.task('css', gulp.series('sass:min:concat'));
 
-
-/**
- * Alias
- */
 gulp.task('js', gulp.series('concat:js:min'));
 
-
-/**
- * Alias
- */
 gulp.task('img', gulp.series('img:min'));
 
-
-/**
- * Alias
- */
 gulp.task('lint', gulp.series('lint:js'));
-
 
 /**
  * Watch task
@@ -456,3 +483,8 @@ gulp.task('watch', gulp.series('watch:scss', 'watch:js'));
  * Build task
  */
 gulp.task('build', gulp.series('clean', 'concat:js:min', 'sass:min:concat', 'img:min'));
+
+/**
+ * Release task
+ */
+gulp.task('release', gulp.series('build', 'bump', 'git:commit', 'git:tag'));
