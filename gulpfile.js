@@ -426,29 +426,33 @@ gulp.task('changelog', () => {
 /**
  * Alias
  */
-gulp.task('css', ['sass:min:concat']);
+gulp.task('css', gulp.series('sass:min:concat'));
+
 
 /**
  * Alias
  */
-gulp.task('js', ['concat:js:min']);
+gulp.task('js', gulp.series('concat:js:min'));
+
 
 /**
  * Alias
  */
-gulp.task('img', ['img:min']);
+gulp.task('img', gulp.series('img:min'));
+
 
 /**
  * Alias
  */
-gulp.task('lint', ['lint:js']);
+gulp.task('lint', gulp.series('lint:js'));
+
+
+/**
+ * Watch task
+ */
+gulp.task('watch', gulp.series('watch:scss', 'watch:js'));
 
 /**
  * Build task
  */
-gulp.task('watch', gulpSequence('watch:scss', 'watch:js'));
-
-/**
- * Build task
- */
-gulp.task('build', gulpSequence('clean', 'concat:js:min', 'sass:min:concat', 'img:min'));
+gulp.task('build', gulp.series('clean', 'concat:js:min', 'sass:min:concat', 'img:min'));
