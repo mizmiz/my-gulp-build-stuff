@@ -312,7 +312,7 @@ gulp.task('watch:scss', () => {
     log(chalk.green(`Watching ${config.scss.src.dir}/*.scss`));
 
     // Start watcher
-    const watcher = gulp.watch(`${config.scss.src.dir}/*.scss`, ['sass:min:concat']);
+    const watcher = gulp.watch(`${config.scss.src.dir}/*.scss`, gulp.series('sass:min:concat'));
 
     const sound = config.sound ? 'Ping' : false;
 
@@ -337,7 +337,7 @@ gulp.task('watch:js', () => {
     log(chalk.green(`Watching ${config.js.src.files.join(', ')}`));
 
     // Start watcher
-    const watcher = gulp.watch(config.js.src.files, ['concat:js:min']);
+    const watcher = gulp.watch(config.js.src.files, gulp.series('concat:js:min'));
 
     const sound = config.sound ? 'Ping' : false;
 
