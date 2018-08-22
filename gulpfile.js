@@ -372,7 +372,14 @@ gulp.task('browser:sync', () => {
 gulp.task('bump', () => {
 
     const arg = process.argv[3] || '--patch';
-    const type = arg.trim().replace(/^-+/, '');
+    let type = arg.trim().replace(/^-+/, '');
+
+    const aliases = {
+        p: 'patch',
+        m: 'minor',
+    };
+
+    type = aliases[type] || type;
 
     const packageFile = './package.json';
 
