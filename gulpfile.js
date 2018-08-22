@@ -356,33 +356,6 @@ gulp.task('watch:js', () => {
 /**
  * Watch tasks SCSS and JS
  */
-gulp.task('watch', () => {
-
-    const files = config.js.src.files.concat(`${config.scss.src.dir}/*.scss`);
-
-    // Console message
-    log(chalk.green(`Watching ${files.join(', ')}`));
-
-    // Start watcher
-    const watcher = gulp.watch(files, ['concat:js:min', 'sass:min:concat']);
-
-    const sound = config.sound ? 'Ping' : false;
-
-    watcher.on('change', (e) => {
-        notifier.notify({
-            title: `${pkg.name} ${pkg.version}`,
-            subtitle: 'concat:js:min + sass:min:concat',
-            message: e.path,
-            sound: sound,
-        }, (err, response) => {
-            // Response is response from notification
-        });
-    });
-});
-
-/**
- * Watch tasks SCSS and JS
- */
 gulp.task('browser:sync', () => {
     browserSync.init(config.browserSync);
 });
