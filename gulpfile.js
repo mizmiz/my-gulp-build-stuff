@@ -290,7 +290,6 @@ gulp.task('lint:js', () => {
             configFile: 'eslintrc.js',
         }))
         .pipe(eslint.format(eslintFriendlyFormatter))
-        .pipe(eslint.failAfterError())
         // Done
         .on('end', () => {
             // Console message
