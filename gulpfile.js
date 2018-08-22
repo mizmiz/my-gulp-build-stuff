@@ -449,7 +449,7 @@ gulp.task('lint', gulp.series('lint:js'));
 /**
  * Watch task
  */
-gulp.task('watch', gulp.series('watch:scss', 'watch:js'));
+gulp.task('watch', gulp.parallel('watch:scss', 'watch:js'));
 
 /**
  * Build task
