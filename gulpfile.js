@@ -459,4 +459,4 @@ gulp.task('build', gulp.series('clean', 'concat:js:min', 'sass:min:concat', 'img
 /**
  * Release task
  */
-gulp.task('release', gulp.series('build', 'bump', 'changelog', 'git:commit', 'git:tag'));
+gulp.task('release', gulp.series('bump', 'build', 'changelog', 'git:commit', 'git:tag'));
