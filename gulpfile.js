@@ -353,7 +353,7 @@ gulp.task('watch:js', () => {
 });
 
 /**
- * Watch tasks SCSS and JS
+ * Autoupdate in browser
  */
 gulp.task('browser:sync', () => {
     browserSync.init(config.browserSync);
