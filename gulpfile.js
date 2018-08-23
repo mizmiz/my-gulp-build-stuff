@@ -315,11 +315,11 @@ gulp.task('watch:scss', () => {
 
     const sound = config.sound ? 'Ping' : false;
 
-    watcher.on('change', (e) => {
+    watcher.on('change', (path, stats) => {
         notifier.notify({
             title: `${pkg.name} ${pkg.version}`,
             subtitle: 'sass:min:concat',
-            message: e.path,
+            message: path,
             sound: sound,
         }, (err, response) => {
             // Response is response from notification
@@ -340,11 +340,11 @@ gulp.task('watch:js', () => {
 
     const sound = config.sound ? 'Ping' : false;
 
-    watcher.on('change', (e) => {
+    watcher.on('change', (path, stats) => {
         notifier.notify({
             title: `${pkg.name} ${pkg.version}`,
             subtitle: 'concat:js:min',
-            message: e.path,
+            message: path,
             sound: sound,
         }, (err, response) => {
             // Response is response from notification
