@@ -10,7 +10,7 @@
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.0.3",
         "babel-preset-env": "^1.6.1",
-        "browser-sync": "^2.23.6",
+        "browser-sync": "^2.24.7",
         "chalk": "^2.4.0",
         "conventional-changelog": "^2.0.3",
         "dateformat": "^3.0.2",
