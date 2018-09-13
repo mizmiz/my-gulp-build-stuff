@@ -179,6 +179,7 @@ gulp.task('concat:js:min', () => {
         .pipe(babel({
             presets: ['env'],
             only: config.js.src.files,
+            babelrc: false,
         }))
         .on('end', () => {
             // Console message
