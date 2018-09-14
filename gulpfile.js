@@ -404,17 +404,17 @@ gulp.task('changelog', (done) => {
         if (err) {
             // Console message
             log(chalk.red(err.message));
-            // Exit
-            done();
-        } else {
-            done();
-            // Update CHANGELOG.md
-            return conventionalChangelog({
-                releaseCount: 0,
-            })
-                .pipe(fileSystem.createWriteStream('CHANGELOG.md'));
+
+            return false;
         }
+
+        // Update CHANGELOG.md
+        return conventionalChangelog({
+            releaseCount: 0,
+        })
+            .pipe(fileSystem.createWriteStream('CHANGELOG.md'));
     });
+    done();
 });
 
 /**
