@@ -398,30 +398,33 @@ gulp.task('bump', () => {
 /**
  * Create changelog
  */
-gulp.task('changelog', (done) => {
+gulp.task('changelog', () => {
     // Check if .git repository exists
-    fileSystem.access('.git', (err) => {
-        if (err) {
-            // Console message
-            log(chalk.red(err.message));
+    try {
+        fileSystem.accessSync('.git', fileSystem.constants.R_OK | fileSystem.constants.W_OK);
 
-            return false;
-        }
+        // Console message
+        log(chalk.green('Write CHANGELOG.md'));
 
         // Update CHANGELOG.md
         return conventionalChangelog({
             releaseCount: 0,
         })
             .pipe(fileSystem.createWriteStream('CHANGELOG.md'));
-    });
-    done();
+    } catch (err) {
+        // Console message
+        log(chalk.red(err.message));
+    }
+
+    return true;
 });
 
 /**
  * Create Git commit
  */
 gulp.task('git:commit', () => {
-    return gulp.src('./')
+    return gulp.src('.')
+        .pipe(git.add())
         .pipe(git.commit('Bump Version'))
         // Done
         .on('end', () => {
