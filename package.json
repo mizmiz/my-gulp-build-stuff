@@ -12,7 +12,7 @@
         "babel-preset-env": "^1.6.1",
         "browser-sync": "^2.26.3",
         "chalk": "^2.4.0",
-        "conventional-changelog": "^2.0.3",
+        "conventional-changelog": "^3.0.5",
         "dateformat": "^3.0.2",
         "del": "^3.0.0",
         "eslint-friendly-formatter": "^4.0.1",
