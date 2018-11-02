@@ -392,6 +392,16 @@ gulp.task('bump', () => {
         .on('end', (response) => {
             // Console message
             log(chalk.green(`Package file updated: ${packageFile}`));
+
+            const now = Date.now() / 1000;
+            fileSystem.utimes(packageFile, now, now, (err) => {
+                if (err) {
+                    // Console message
+                    log(chalk.red('utimes FAILED'));
+                }
+                // Console message
+                log(chalk.green(`Access Time and Modified Time for ${packageFile} updated`));
+            });
         });
 });
 
