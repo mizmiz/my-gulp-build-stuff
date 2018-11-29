@@ -28,7 +28,7 @@ const bump = require('gulp-bump');
 const conventionalChangelog = require('conventional-changelog');
 const fileSystem = require('fs');
 const git = require('gulp-git');
-const purify = require('gulp-purifycss');
+const purgecss = require('gulp-purgecss');
 
 const banner = `
 /**
@@ -131,7 +131,9 @@ gulp.task('sass:min:concat', () => {
             log(chalk.green('SCSS prefixed'));
         })
         // Remove unused css
-        .pipe(purify([config.js.dest.file, config.html.src]))
+        .pipe(purgecss({
+            content: [config.js.dest.file, config.html.src]
+        }))
         .on('end', () => {
             // Console message
             log(chalk.green(`Removed CSS unused in files: ${config.js.dest.file}, ${config.html.src}`));
