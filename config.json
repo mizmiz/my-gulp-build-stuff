@@ -17,7 +17,7 @@
 
     "img": {
         "src": {
-            "dir": "src/assets/images"
+            "dir": "src/images"
         },
         "dest": {
             "dir": "dest/images"
