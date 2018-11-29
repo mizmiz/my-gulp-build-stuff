@@ -28,7 +28,10 @@
         "dest": {
             "dir": "dest",
             "file": "main.min.css"
-        }
+        },
+        "whitelist": [
+            "badError"
+        ]
     },
 
     "js": {

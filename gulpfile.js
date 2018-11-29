@@ -132,7 +132,8 @@ gulp.task('sass:min:concat', () => {
         })
         // Remove unused css
         .pipe(purgecss({
-            content: [config.js.dest.file, config.html.src]
+            content: [config.js.dest.file, config.html.src],
+            whitelist: config.css.whitelist
         }))
         .on('end', () => {
             // Console message
