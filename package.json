@@ -27,14 +27,14 @@
         "gulp-eslint": "^5.0.0",
         "gulp-git": "^2.8.0",
         "gulp-header": "^2.0.5",
-        "gulp-imagemin": "^4.1.0",
+        "gulp-imagemin": "^5.0.3",
+        "gulp-purifycss": "^0.2.0",
         "gulp-sass": "^4.0.2",
         "gulp-sourcemaps": "^2.6.1",
         "gulp-uglify": "^3.0.0",
         "lodash": "^4.17.11",
         "node-notifier": "^5.3.0",
-        "pretty-bytes": "^5.0.0",
-        "gulp-purifycss": "^0.2.0"
+        "pretty-bytes": "^5.0.0"
     },
     "dependencies": {}
 }
