@@ -4,6 +4,10 @@
         "time": "HH:MM:ss"
     },
 
+    "html": {
+        "src": "src/**/*.tpl"
+    },
+
     "scss": {
         "src": {
             "dir": "src/sass",
