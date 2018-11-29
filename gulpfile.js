@@ -148,6 +148,15 @@ gulp.task('sass:min:concat', () => {
             match: '**/*.css',
         }))
         .on('end', () => {
+            const now = Date.now() / 1000;
+            fileSystem.utimes(`./${config.css.dest.dir}/${config.css.dest.file}`, now, now, (err) => {
+                if (err) {
+                    // Console message
+                    log(chalk.red('utimes FAILED'));
+                }
+                // Console message
+                log(chalk.green(`Access Time and Modified Time for ${config.css.dest.file} updated`));
+            });
             // Console message
             log(chalk.green(`CSS file written to ./${config.css.dest.dir}/${config.css.dest.file}`));
         })
