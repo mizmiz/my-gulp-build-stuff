@@ -45,6 +45,23 @@ const banner = `
 `;
 
 /**
+ * Helper function: Access Time and Modified Time
+ * @param {string} path Path to file
+ */
+const fixTS = (path) => {
+    const now = Date.now() / 1000;
+
+    fileSystem.utimes(path, now, now, (err) => {
+        if (err) {
+            // Console message
+            log(chalk.red('utimes FAILED'));
+        }
+        // Console message
+        log(chalk.green(`Access Time and Modified Time for ${path} updated`));
+    });
+};
+
+/**
  * Clean destination directories
  */
 gulp.task('clean', () => {
@@ -148,17 +165,11 @@ gulp.task('sass:min:concat', () => {
             match: '**/*.css',
         }))
         .on('end', () => {
-            const now = Date.now() / 1000;
-            fileSystem.utimes(`./${config.css.dest.dir}/${config.css.dest.file}`, now, now, (err) => {
-                if (err) {
-                    // Console message
-                    log(chalk.red('utimes FAILED'));
-                }
-                // Console message
-                log(chalk.green(`Access Time and Modified Time for ${config.css.dest.file} updated`));
-            });
             // Console message
             log(chalk.green(`CSS file written to ./${config.css.dest.dir}/${config.css.dest.file}`));
+
+            // Fix timestamps
+            fixTS(`./${config.css.dest.dir}/${config.css.dest.file}`);
         })
         // Error
         .on('error', () => {
@@ -238,6 +249,9 @@ gulp.task('concat:js:min', () => {
         .on('end', () => {
             // Console message
             log(chalk.green(`JS file written to ./${config.js.dest.dir}/${config.js.dest.file}`));
+
+            // Fix timestamps
+            fixTS(`./${config.js.dest.dir}/${config.js.dest.file}`);
         })
         // Error
         .on('error', () => {
@@ -409,15 +423,8 @@ gulp.task('bump', () => {
             // Console message
             log(chalk.green(`Package file updated: ${packageFile}`));
 
-            const now = Date.now() / 1000;
-            fileSystem.utimes(packageFile, now, now, (err) => {
-                if (err) {
-                    // Console message
-                    log(chalk.red('utimes FAILED'));
-                }
-                // Console message
-                log(chalk.green(`Access Time and Modified Time for ${packageFile} updated`));
-            });
+            // Fix timestamps
+            fixTS(packageFile);
         });
 });
 
