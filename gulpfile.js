@@ -102,71 +102,89 @@ gulp.task('sass:min:concat', () => {
         return false;
     }
 
+    const purge = process.argv[3] === '--purge';
+
     // Reload package info
     delete require.cache[require.resolve('./package.json')];
     pkg = require('./package.json');
 
-    return gulp.src(config.scss.src.file)
+    let stream = gulp.src(config.scss.src.file);
+
+    if (!purge) {
         // Init sourcemaps
-        .pipe(sourcemaps.init())
-        // Compile SCSS
-        .pipe(sass().on('error', sass.logError))
+        stream = stream.pipe(sourcemaps.init());
+    }
+
+    // Compile SCSS
+    stream = stream.pipe(sass().on('error', sass.logError))
         .on('end', () => {
             // Console message
             log(chalk.green('SCSS compiled to CSS'));
-        })
-        // Concat to one file
-        .pipe(concat(config.css.dest.file))
+        });
+
+    // Concat to one file
+    stream = stream.pipe(concat(config.css.dest.file))
         .on('end', () => {
             // Console message
             log(chalk.green('CSS combined to one file'));
-        })
-        // Prefix SCSS
-        .pipe(autoprefixer({
-            browsers: ['last 5 versions'],
-            cascade: false,
-        }))
+        });
+
+    // Prefix SCSS
+    stream = stream.pipe(autoprefixer({
+        browsers: ['last 5 versions'],
+        cascade: false,
+    }))
         .on('end', () => {
             // Console message
             log(chalk.green('SCSS prefixed'));
-        })
+        });
+
+    if (purge) {
         // Remove unused css
-        .pipe(purgecss({
+        stream = stream.pipe(purgecss({
             content: [config.js.dest.file, config.html.src],
-            whitelist: config.css.whitelist
+            whitelist: config.css.whitelist,
         }))
-        .on('end', () => {
-            // Console message
-            log(chalk.green(`Removed CSS unused in files: ${config.js.dest.file}, ${config.html.src}`));
-        })
-        // Minify CSS
-        .pipe(cleanCSS({debug: true}, (details) => {
-            const originalSize = prettyBytes(details.stats.originalSize);
-            const minifiedSize = prettyBytes(details.stats.minifiedSize);
-            const percent = (details.stats.efficiency * 100).toFixed(1);
-            log(chalk.green(`CSS minified (${originalSize} → ${minifiedSize} saved ${percent}%)`));
-        }))
-        // Add Header with data from package.json
-        .pipe(header(banner, {
-            pkg: pkg,
-            date: dateFormat(new Date(), config.format.date),
-            time: dateFormat(new Date(), config.format.time),
-            file: config.css.dest.file,
-        }))
+            .on('end', () => {
+                // Console message
+                log(chalk.green(`Removed unused CSS in files: ${config.js.dest.file}, ${config.html.src}`));
+            });
+    }
+
+    // Minify CSS
+    stream = stream.pipe(cleanCSS({debug: true}, (details) => {
+        const originalSize = prettyBytes(details.stats.originalSize);
+        const minifiedSize = prettyBytes(details.stats.minifiedSize);
+        const percent = (details.stats.efficiency * 100).toFixed(1);
+        log(chalk.green(`CSS minified (${originalSize} → ${minifiedSize} saved ${percent}%)`));
+    }));
+
+    // Add Header with data from package.json
+    stream = stream.pipe(header(banner, {
+        pkg: pkg,
+        date: dateFormat(new Date(), config.format.date),
+        time: dateFormat(new Date(), config.format.time),
+        file: config.css.dest.file,
+    }));
+
+    if (!purge) {
         // Write sourcemaps
-        .pipe(sourcemaps.write('.', {
+        stream = stream.pipe(sourcemaps.write('.', {
             includeContent: false,
         }))
-        .on('end', () => {
-            // Console message
-            log(chalk.green(`CSS sourcemap written to ./${config.css.dest.dir}/${config.css.dest.file}.map`));
-        })
-        // Write CSS file
-        .pipe(gulp.dest(`./${config.css.dest.dir}/`))
-        // Make browersync reload CSS only!
-        .pipe(browserSync.stream({
-            match: '**/*.css',
-        }))
+            .on('end', () => {
+                // Console message
+                log(chalk.green(`CSS sourcemap written to ./${config.css.dest.dir}/${config.css.dest.file}.map`));
+            });
+    }
+
+    // Write CSS file
+    stream = stream.pipe(gulp.dest(`./${config.css.dest.dir}/`));
+
+    // Make browersync reload CSS only!
+    stream = stream.pipe(browserSync.stream({
+        match: '**/*.css',
+    }))
         .on('end', () => {
             // Console message
             log(chalk.green(`CSS file written to ./${config.css.dest.dir}/${config.css.dest.file}`));
@@ -179,6 +197,8 @@ gulp.task('sass:min:concat', () => {
             // Console message
             log(chalk.red('sass:min:concat FAILED'));
         });
+
+    return stream;
 });
 
 
