@@ -207,7 +207,7 @@ gulp.task('concat:js:min', () => {
         .pipe(sourcemaps.init())
         // Convert
         .pipe(babel({
-            presets: ['env'],
+            presets: ['@babel/env'],
             only: config.js.src.files,
             babelrc: false,
         }))

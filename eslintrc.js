@@ -3,8 +3,6 @@ const WARN = 'warn';
 const DISABLE = 'off';
 
 module.exports = {
-    parser: 'babel-eslint',
-
     env: {
         'browser': true,
         'commonjs': true,
