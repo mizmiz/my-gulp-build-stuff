@@ -66,22 +66,24 @@ const fixTS = (path) => {
  */
 gulp.task('clean', () => {
 
-    const dirs = [
-        `${config.css.dest.dir}/*`,
-        `${config.js.dest.dir}/*`,
+    const files = [
+        `${config.css.dest.dir}/${config.css.dest.file}`,
+        `${config.css.dest.dir}/${config.css.dest.file}.map`,
+        `${config.js.dest.dir}/${config.js.dest.file}`,
+        `${config.js.dest.dir}/${config.js.dest.file}.map`,
         `${config.img.dest.dir}/*`,
     ];
 
     // Delete all files in directories
-    return del(dirs, {
+    return del(files, {
         force: true,
     }).then((paths) => {
         if (paths.length < 1) {
             // Console message
-            log(chalk.yellow(`No files deleted: ${dirs.join(', ')}`));
+            log(chalk.yellow(`No files deleted: ${files.join(', ')}`));
         } else {
             // Console message
-            log(chalk.green(`${paths.length} files deleted: ${dirs.join(', ')}`));
+            log(chalk.green(`${paths.length} files deleted: ${files.join(', ')}`));
         }
     });
 });
