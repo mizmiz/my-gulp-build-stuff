@@ -30,6 +30,8 @@ const fileSystem = require('fs');
 const git = require('gulp-git');
 const purgecss = require('gulp-purgecss');
 
+require('@babel/polyfill');
+
 const banner = `
 /**
  * File:     <%= file %>

@@ -8,6 +8,7 @@
     "private": true,
     "devDependencies": {
         "@babel/core": "^7.4.4",
+        "@babel/polyfill": "^7.4.4",
         "@babel/preset-env": "^7.4.4",
         "babel-core": "^6.26.0",
         "babel-eslint": "^10.0.1",
