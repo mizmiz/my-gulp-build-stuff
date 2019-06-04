@@ -11,3 +11,5 @@ var wrong = [
     `world`,
     'hello'
 ]
+
+console.log("test");
