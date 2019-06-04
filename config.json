@@ -52,7 +52,6 @@
     "browserSync": {
         "proxy": "http://test.local/",
         "port": 3000,
-        "open": false,
         "reloadOnRestart": true,
         "notify": false,
         "reloadDelay": 0,
