@@ -1,5 +1,17 @@
+## <small>1.0.2 (2019-06-04)</small>
+
+* New: Add example PNG file 86f017a
+* New: Add polyfill 1d47d68
+* Upgrade: Deps 46a77b7
+* Upgrade: Deps 1b0309d
+* Update: Extend example JS file b8ab762
+* Fix: Remove unnecessary prop in config json 19e33d5
+
+
+
 ## <small>1.0.1 (2019-03-01)</small>
 
+* Bump Version 0108faa
 * Fix: Do not clear dest directories for js and css 2524372
 
 
