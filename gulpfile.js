@@ -135,7 +135,6 @@ gulp.task('sass:min:concat', () => {
 
     // Prefix SCSS
     stream = stream.pipe(autoprefixer({
-        browsers: ['last 5 versions'],
         cascade: false,
     }))
         .on('end', () => {
