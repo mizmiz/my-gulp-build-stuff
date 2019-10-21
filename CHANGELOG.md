@@ -1,5 +1,13 @@
+## <small>1.0.3 (2019-10-21)</small>
+
+* Fix: Update browserlist config 6c8980c
+* Upgrade: Deps 626a025
+
+
+
 ## <small>1.0.2 (2019-06-04)</small>
 
+* Bump Version afd8853
 * New: Add example PNG file 86f017a
 * New: Add polyfill 1d47d68
 * Upgrade: Deps 46a77b7
