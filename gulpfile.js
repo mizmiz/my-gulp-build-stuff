@@ -29,6 +29,8 @@ const conventionalChangelog = require('conventional-changelog');
 const fileSystem = require('fs');
 const git = require('gulp-git');
 const purgecss = require('gulp-purgecss');
+const imageminWebp = require('imagemin-webp');
+const extReplace = require('gulp-ext-replace');
 
 require('@babel/polyfill');
 
@@ -330,6 +332,54 @@ gulp.task('img:min', () => {
 });
 
 /**
+ * Create WebP images
+ */
+gulp.task('img:min:webp', () => {
+
+    gulp.src([`${config.img.src.dir}/**/*.{jpg,jpeg}`])
+        .pipe(imagemin([
+            imageminWebp({
+                quality: 75,
+            })
+        ], {
+            verbose: true,
+        }))
+        // Done
+        .on('end', () => {
+            // Console message
+            log(chalk.green('WebP images created from JPGs'));
+        })
+        .pipe(extReplace('.webp'))
+        .pipe(gulp.dest(config.img.dest.dir))
+        // Error
+        .on('error', () => {
+            // Console message
+            log(chalk.red('img:min:webp FAILED'));
+        });
+
+    return gulp.src([`${config.img.src.dir}/**/*.png`])
+        .pipe(imagemin([
+            imageminWebp({
+                lossless: true,
+            })
+        ], {
+            verbose: true,
+        }))
+        // Done
+        .on('end', () => {
+            // Console message
+            log(chalk.green('WebP images created from PNGs'));
+        })
+        .pipe(extReplace('.webp'))
+        .pipe(gulp.dest(config.img.dest.dir))
+        // Error
+        .on('error', () => {
+            // Console message
+            log(chalk.red('img:min:webp FAILED'));
+        });
+});
+
+/**
  * Lint JS
  */
 gulp.task('lint:js', () => {
@@ -523,7 +573,7 @@ gulp.task('css', gulp.series('sass:min:concat'));
 
 gulp.task('js', gulp.series('concat:js:min'));
 
-gulp.task('img', gulp.series('img:min'));
+gulp.task('img', gulp.series('img:min', 'img:min:webp'));
 
 gulp.task('lint', gulp.series('lint:js'));
 
@@ -535,7 +585,7 @@ gulp.task('watch', gulp.parallel('watch:scss', 'watch:js'));
 /**
  * Build task
  */
-gulp.task('build', gulp.series('clean', 'concat:js:min', 'sass:min:concat', 'img:min'));
+gulp.task('build', gulp.series('clean', 'concat:js:min', 'sass:min:concat', 'img:min', 'img:min:webp'));
 
 /**
  * Release task

@@ -28,6 +28,7 @@
         "gulp-clean-css": "^4.2.0",
         "gulp-concat": "^2.6.0",
         "gulp-eslint": "^6.0.0",
+        "gulp-ext-replace": "^0.3.0",
         "gulp-git": "^2.9.0",
         "gulp-header": "^2.0.9",
         "gulp-imagemin": "^6.1.1",
@@ -35,13 +36,14 @@
         "gulp-sass": "^4.0.2",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-uglify": "^3.0.2",
+        "imagemin-webp": "^5.1.0",
         "lodash": "^4.17.15",
         "node-notifier": "^6.0.0",
         "pretty-bytes": "^5.3.0"
     },
     "dependencies": {},
     "browserslist": [
-      "> 0.25%",
-      "not dead"
+        "> 0.25%",
+        "not dead"
     ]
 }
