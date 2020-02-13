@@ -299,7 +299,7 @@ gulp.task('img:min', () => {
                 interlaced: false,
                 optimizationLevel: 1,
             }),
-            imagemin.jpegtran({
+            imagemin.mozjpeg({
                 // Lossless conversion to progressive.
                 progressive: false,
             }),
