@@ -6,6 +6,14 @@
     "homepage": "www.ziem.io",
     "license": "UNLICENSED",
     "private": true,
+    "scripts": {
+        "lint": "gulp lint",
+        "build": "gulp build",
+        "release:prerelease": "gulp release --prerelease",
+        "release:major": "gulp release --patch",
+        "release:minor": "gulp release --minor",
+        "release:patch": "gulp release --major"
+    },
     "devDependencies": {
         "@babel/core": "^7.8.4",
         "@babel/polyfill": "^7.8.3",
