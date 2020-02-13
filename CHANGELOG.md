@@ -1,5 +1,14 @@
+## 1.1.0 (2020-02-13)
+
+* New: Add creation of webp images 1dce611
+* New: Add npm scripts cd2f2ac
+* Upgrade: Deps 80c09d0
+
+
+
 ## <small>1.0.3 (2019-10-21)</small>
 
+* Bump Version 2b6834b
 * Fix: Update browserlist config 6c8980c
 * Upgrade: Deps 626a025
 
@@ -35,8 +44,8 @@
 * Avoid error if no .git repository is available fd29b19
 * Bump Version 06921ef
 * Comment fa3ffd4
-* EsLint ef6b99e
 * EsLint a9ff8d7
+* EsLint ef6b99e
 * Fix gulp tasks for gulp 4 4fe916f
 * Fix notification 324301b
 * Fix order in 'release' task c3a9346
@@ -52,8 +61,8 @@
 * update dep 'babel-eslint' 071b161
 * Update dep 'browser-sync' c8eb5b0
 * Update dep 'browser-sync' 6dd3ffc
-* Update dep 'conventional-changelog' f8954fb
 * Update dep 'conventional-changelog' 2f58563
+* Update dep 'conventional-changelog' f8954fb
 * Update dep 'gulp-autoprefixer' 8039f89
 * Update dep 'gulp-sass' 152f523
 * Update dep 'lodash' 4d903c7
