@@ -1,5 +1,13 @@
+## <small>1.1.1 (2020-10-27)</small>
+
+* Fix: Set correct release scripts 1335b1a
+* Upgrade: Deps 3c7708f
+
+
+
 ## 1.1.0 (2020-02-13)
 
+* Bump Version f90987b
 * New: Add creation of webp images 1dce611
 * New: Add npm scripts cd2f2ac
 * Upgrade: Deps 80c09d0
