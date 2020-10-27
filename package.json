@@ -10,9 +10,9 @@
         "lint": "gulp lint",
         "build": "gulp build",
         "release:prerelease": "gulp release --prerelease",
-        "release:major": "gulp release --patch",
+        "release:major": "gulp release --major",
         "release:minor": "gulp release --minor",
-        "release:patch": "gulp release --major"
+        "release:patch": "gulp release --patch"
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
