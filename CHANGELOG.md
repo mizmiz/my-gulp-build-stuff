@@ -1,5 +1,12 @@
+## <small>1.1.3 (2022-02-14)</small>
+
+* Fix: Compatibility in test 7031243
+
+
+
 ## <small>1.1.2 (2022-02-14)</small>
 
+* Bump Version 2c3b8dc
 * Upgrade: Deps 71747f7
 
 
