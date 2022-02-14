@@ -1,5 +1,12 @@
+## <small>1.1.2 (2022-02-14)</small>
+
+* Upgrade: Deps 71747f7
+
+
+
 ## <small>1.1.1 (2020-10-27)</small>
 
+* Bump Version 776a708
 * Fix: Set correct release scripts 1335b1a
 * Upgrade: Deps 3c7708f
 
