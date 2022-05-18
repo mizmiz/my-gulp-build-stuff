@@ -1,5 +1,12 @@
+## <small>1.1.4 (2022-05-18)</small>
+
+* Upgrade: Deps e4b9807
+
+
+
 ## <small>1.1.3 (2022-02-14)</small>
 
+* Bump Version 76ea200
 * Fix: Compatibility in test 7031243
 
 
